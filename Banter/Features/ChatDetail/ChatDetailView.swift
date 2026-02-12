@@ -118,8 +118,19 @@ struct ChatDetailView: View {
                     }
                 }
                 .onAppear {
-                    if let lastMessage = viewModel.messages.last {
-                        proxy.scrollTo(lastMessage.objectID, anchor: .bottom)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        if let lastMessage = viewModel.messages.last {
+                            proxy.scrollTo(lastMessage.objectID, anchor: .bottom)
+                        }
+                    }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        if let lastMessage = viewModel.messages.last {
+                            withAnimation(.easeOut(duration: 0.25)) {
+                                proxy.scrollTo(lastMessage.objectID, anchor: .bottom)
+                            }
+                        }
                     }
                 }
             }

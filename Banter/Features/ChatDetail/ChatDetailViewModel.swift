@@ -90,20 +90,17 @@ final class ChatDetailViewModel {
     }
 
     private func triggerAgentReply() {
-        agentService.onUserMessageSent(chat: chat) { [weak self] message in
-            guard let self else { return }
-            self.isAgentTyping = false
-            self.messages.append(message)
-            self.scrollToMessageId = message.objectID
-        }
-
-        Task {
-            try? await Task.sleep(for: .milliseconds(300))
-            let userCount = dataService.userMessageCount(for: chat)
-            let couldReply = (4...5).contains(where: { userCount % $0 == 0 })
-            if couldReply {
-                isAgentTyping = true
+        agentService.onUserMessageSent(
+            chat: chat,
+            onTyping: { [weak self] isTyping in
+                self?.isAgentTyping = isTyping
+            },
+            onReply: { [weak self] message in
+                guard let self else { return }
+                self.isAgentTyping = false
+                self.messages.append(message)
+                self.scrollToMessageId = message.objectID
             }
-        }
+        )
     }
 }

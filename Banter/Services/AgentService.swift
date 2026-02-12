@@ -12,6 +12,8 @@ final class AgentService {
 
     private let dataService: ChatDataService
     private var debounceTask: Task<Void, Never>?
+    private var messagesSinceLastReply: Int = 0
+    private var nextReplyThreshold: Int = Int.random(in: 4...5)
 
     static let predefinedResponses = [
         "I'm looking into that for you.",
@@ -43,20 +45,26 @@ final class AgentService {
         self.dataService = dataService
     }
 
-    func onUserMessageSent(chat: Chat, onReply: @escaping (Message) -> Void) {
+    /// Called after every user message. Agent replies every 4-5 user messages.
+    func onUserMessageSent(chat: Chat, onTyping: @escaping (Bool) -> Void, onReply: @escaping (Message) -> Void) {
         debounceTask?.cancel()
+        messagesSinceLastReply += 1
 
         debounceTask = Task {
             try? await Task.sleep(for: .milliseconds(500))
             guard !Task.isCancelled else { return }
 
-            let userCount = dataService.userMessageCount(for: chat)
-            let threshold = Int.random(in: 4...5)
-            let shouldReply = userCount % threshold == 0
+            guard messagesSinceLastReply >= nextReplyThreshold else { return }
 
-            guard shouldReply else { return }
+            // Reset counter and pick next random threshold
+            messagesSinceLastReply = 0
+            nextReplyThreshold = Int.random(in: 4...5)
 
-            let delay = Int.random(in: 1000...2000)
+            // Show typing indicator
+            onTyping(true)
+
+            // Simulate thinking delay: 2 seconds
+            let delay = Int(2000)
             try? await Task.sleep(for: .milliseconds(delay))
             guard !Task.isCancelled else { return }
 
