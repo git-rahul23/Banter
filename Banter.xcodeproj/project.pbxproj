@@ -3,18 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		152DEB8DE3BAB34B712CA214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FEA933A60E5EDA62B61D3 /* Assets.xcassets */; };
+		3A48001EF66744594ADF3430 /* Chat+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A65FBD98683ABBB8C13569 /* Chat+CoreDataClass.swift */; };
+		45BE29AF3C7F7A7F6547D86E /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3DFE76616E20ADA1FA4BDA /* PersistenceController.swift */; };
+		77075CEEDBB559062D6DEF9A /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18CFDDC71FD140BBAE252D9 /* Message+CoreDataClass.swift */; };
+		8E89A54268BBCB293F150F3E /* Banter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EAF5430D8DC84E93E90FEA /* Banter.xcdatamodeld */; };
 		DFBF2E9C46837842F9453CB3 /* BanterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6248E88C3CC6B17424D00 /* BanterApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B2BBD8C600FFCB9300E739D /* Banter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Banter.xcdatamodel; sourceTree = "<group>"; };
+		54A65FBD98683ABBB8C13569 /* Chat+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AF3DFE76616E20ADA1FA4BDA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		C1E01452BA999BBE1CDE462F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C24FEA933A60E5EDA62B61D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4D6248E88C3CC6B17424D00 /* BanterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BanterApp.swift; sourceTree = "<group>"; };
+		D18CFDDC71FD140BBAE252D9 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D6E60BD27E70A8D287B14D80 /* Banter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Banter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -35,12 +43,32 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		3ECC5EC7AB43CD2165FF9A70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				54A65FBD98683ABBB8C13569 /* Chat+CoreDataClass.swift */,
+				D18CFDDC71FD140BBAE252D9 /* Message+CoreDataClass.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F62342887F4E23FDDE51139 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AF3DFE76616E20ADA1FA4BDA /* PersistenceController.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		B384B9826382E4A367809E7B /* Banter */ = {
 			isa = PBXGroup;
 			children = (
 				C24FEA933A60E5EDA62B61D3 /* Assets.xcassets */,
+				20EAF5430D8DC84E93E90FEA /* Banter.xcdatamodeld */,
 				C1E01452BA999BBE1CDE462F /* Info.plist */,
 				2B31D3BB6B54F39C8B8D2EA2 /* App */,
+				3ECC5EC7AB43CD2165FF9A70 /* Models */,
+				3F62342887F4E23FDDE51139 /* Persistence */,
 			);
 			path = Banter;
 			sourceTree = "<group>";
@@ -98,6 +126,7 @@
 			);
 			mainGroup = D4AAF0CBE8B9404F413F284E;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -122,7 +151,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E89A54268BBCB293F150F3E /* Banter.xcdatamodeld in Sources */,
 				DFBF2E9C46837842F9453CB3 /* BanterApp.swift in Sources */,
+				3A48001EF66744594ADF3430 /* Chat+CoreDataClass.swift in Sources */,
+				77075CEEDBB559062D6DEF9A /* Message+CoreDataClass.swift in Sources */,
+				45BE29AF3C7F7A7F6547D86E /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +357,19 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		20EAF5430D8DC84E93E90FEA /* Banter.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4B2BBD8C600FFCB9300E739D /* Banter.xcdatamodel */,
+			);
+			currentVersion = 4B2BBD8C600FFCB9300E739D /* Banter.xcdatamodel */;
+			path = Banter.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F398A7A64F141CCCC38C5865 /* Project object */;
 }
