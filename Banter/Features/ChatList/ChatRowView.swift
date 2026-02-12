@@ -42,14 +42,27 @@ struct ChatRowView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                let preview = (chat.lastMessage ?? "").isEmpty ? "No messages yet" : (chat.lastMessage ?? "")
-                Text(preview)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                if (chat.lastMessage ?? "").isEmpty {
+                    Text("No messages yet")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                } else {
+                    (Text(Image(systemName: isLastMessageFromUser ? "arrow.turn.up.right" : "sparkles"))
+                        .font(.caption2)
+                        .foregroundColor(isLastMessageFromUser ? .blue : .purple)
+                     + Text(" \(chat.lastMessage ?? "")")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary))
                     .lineLimit(2)
+                }
             }
         }
         .padding(.vertical, 4)
+    }
+
+    private var isLastMessageFromUser: Bool {
+        (chat.lastMessageSender ?? "") == MessageSender.user.rawValue
     }
 
     private var avatarText: String {
