@@ -58,6 +58,31 @@ final class ChatDetailViewModel {
         triggerAgentReply()
     }
 
+    func sendImageMessage(image: UIImage) {
+        Task {
+            guard let saved = await ImageSaver.shared.saveImage(image) else { return }
+
+            let message = dataService.sendMessage(
+                chat: chat,
+                text: "",
+                type: .file,
+                sender: .user,
+                filePath: saved.path,
+                fileSize: saved.fileSize,
+                thumbnailPath: saved.thumbnailPath
+            )
+
+            if messages.isEmpty {
+                dataService.updateChatTitle(chat, title: "Image Chat")
+            }
+
+            messages.append(message)
+            scrollToMessageId = message.objectID
+
+            triggerAgentReply()
+        }
+    }
+
     func updateTitle(_ newTitle: String) {
         let trimmed = newTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }

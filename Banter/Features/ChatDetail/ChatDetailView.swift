@@ -60,14 +60,12 @@ struct ChatDetailView: View {
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePickerView(sourceType: .photoLibrary) { image in
-                // TODO: Enable after ImageSaver is added
-                // viewModel?.sendImageMessage(image: image)
+                viewModel?.sendImageMessage(image: image)
             }
         }
         .sheet(isPresented: $showCamera) {
             ImagePickerView(sourceType: .camera) { image in
-                // TODO: Enable after ImageSaver is added
-                // viewModel?.sendImageMessage(image: image)
+                viewModel?.sendImageMessage(image: image)
             }
         }
         .fullScreenCover(isPresented: $showFullscreenImage) {
