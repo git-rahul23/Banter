@@ -10,8 +10,10 @@
 		152DEB8DE3BAB34B712CA214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FEA933A60E5EDA62B61D3 /* Assets.xcassets */; };
 		3A48001EF66744594ADF3430 /* Chat+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A65FBD98683ABBB8C13569 /* Chat+CoreDataClass.swift */; };
 		45BE29AF3C7F7A7F6547D86E /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3DFE76616E20ADA1FA4BDA /* PersistenceController.swift */; };
+		765C3B35C487EAF999767BF2 /* ChatDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72B121904FD699E0854584F /* ChatDataService.swift */; };
 		77075CEEDBB559062D6DEF9A /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18CFDDC71FD140BBAE252D9 /* Message+CoreDataClass.swift */; };
 		8E89A54268BBCB293F150F3E /* Banter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EAF5430D8DC84E93E90FEA /* Banter.xcdatamodeld */; };
+		A6ED45DDC4A8D2698CC51652 /* AgentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28BF69E6EFBECE0F1FD5631 /* AgentService.swift */; };
 		DFBF2E9C46837842F9453CB3 /* BanterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6248E88C3CC6B17424D00 /* BanterApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +25,9 @@
 		C24FEA933A60E5EDA62B61D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4D6248E88C3CC6B17424D00 /* BanterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BanterApp.swift; sourceTree = "<group>"; };
 		D18CFDDC71FD140BBAE252D9 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D28BF69E6EFBECE0F1FD5631 /* AgentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentService.swift; sourceTree = "<group>"; };
 		D6E60BD27E70A8D287B14D80 /* Banter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Banter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E72B121904FD699E0854584F /* ChatDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -41,6 +45,15 @@
 				C4D6248E88C3CC6B17424D00 /* BanterApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		3A63C7E120AA1F9418A10CF7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D28BF69E6EFBECE0F1FD5631 /* AgentService.swift */,
+				E72B121904FD699E0854584F /* ChatDataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		3ECC5EC7AB43CD2165FF9A70 /* Models */ = {
@@ -69,6 +82,7 @@
 				2B31D3BB6B54F39C8B8D2EA2 /* App */,
 				3ECC5EC7AB43CD2165FF9A70 /* Models */,
 				3F62342887F4E23FDDE51139 /* Persistence */,
+				3A63C7E120AA1F9418A10CF7 /* Services */,
 			);
 			path = Banter;
 			sourceTree = "<group>";
@@ -151,9 +165,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6ED45DDC4A8D2698CC51652 /* AgentService.swift in Sources */,
 				8E89A54268BBCB293F150F3E /* Banter.xcdatamodeld in Sources */,
 				DFBF2E9C46837842F9453CB3 /* BanterApp.swift in Sources */,
 				3A48001EF66744594ADF3430 /* Chat+CoreDataClass.swift in Sources */,
+				765C3B35C487EAF999767BF2 /* ChatDataService.swift in Sources */,
 				77075CEEDBB559062D6DEF9A /* Message+CoreDataClass.swift in Sources */,
 				45BE29AF3C7F7A7F6547D86E /* PersistenceController.swift in Sources */,
 			);
