@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 import Observation
 
 @MainActor
@@ -20,7 +21,7 @@ final class ChatDetailViewModel {
     var messages: [Message] = []
     var draftText: String = ""
     var isAgentTyping: Bool = false
-    var scrollToMessageId: UUID?
+    var scrollToMessageId: NSManagedObjectID?
 
     init(chat: Chat, dataService: ChatDataService) {
         self.chat = chat
@@ -52,7 +53,7 @@ final class ChatDetailViewModel {
         }
 
         messages.append(message)
-        scrollToMessageId = message.id
+        scrollToMessageId = message.objectID
 
         triggerAgentReply()
     }
@@ -68,7 +69,7 @@ final class ChatDetailViewModel {
             guard let self else { return }
             self.isAgentTyping = false
             self.messages.append(message)
-            self.scrollToMessageId = message.id
+            self.scrollToMessageId = message.objectID
         }
 
         Task {

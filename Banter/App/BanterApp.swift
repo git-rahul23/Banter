@@ -13,18 +13,8 @@ struct BanterApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ChatListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
-    }
-}
-
-struct ContentView: View {
-    var body: some View {
-        NavigationStack {
-            Text("Setup")
-                .font(.title)
-                .navigationTitle("Banter")
         }
     }
 }
