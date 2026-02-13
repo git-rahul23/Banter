@@ -18,7 +18,21 @@ Banter is an iOS chat application that enables seamless conversations with an AI
 
 Watch Banter in action! This screen recording showcases the app's key features including creating new chats, sending messages, real-time typing indicators, and the smooth user experience.
 
-> 💡 **Tip**: Click on the video above to watch the full demonstration, or view it directly in the [`screenshots/demo.mov`](screenshots/demo.mov) file.
+https://github.com/user-attachments/assets/demo.mp4
+
+<details>
+<summary>📱 What's shown in the demo</summary>
+
+- App launch with custom splash screen
+- Browsing existing conversations with message previews
+- Creating a new chat
+- Sending text messages
+- Real-time typing indicators
+- Smooth animations and transitions
+- Chat management features
+- Image sharing capabilities
+
+</details>
 
 ## Features
 
