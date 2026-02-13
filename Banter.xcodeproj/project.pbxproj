@@ -29,6 +29,9 @@
 		F8ED3F8A1AFD0552967E8C6B /* TimestampFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072951E9C4B0437D6BD82E7E /* TimestampFormatter.swift */; };
 		FD9E1CC42F3F021000B13045 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9E1CC32F3F021000B13045 /* Constants.swift */; };
 		FD9E1CC62F3F526A00B13045 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9E1CC52F3F526A00B13045 /* Launch Screen.storyboard */; };
+		FDD538382F3F7BEE003BD7BD /* launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = FDD538362F3F7BED003BD7BD /* launcher.png */; };
+		FDD538392F3F7BEE003BD7BD /* chat-detail.png in Resources */ = {isa = PBXBuildFile; fileRef = FDD538342F3F7BED003BD7BD /* chat-detail.png */; };
+		FDD5383A2F3F7BEE003BD7BD /* chat-list.png in Resources */ = {isa = PBXBuildFile; fileRef = FDD538352F3F7BED003BD7BD /* chat-list.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,9 @@
 		F0272A508B9E79F338F02F47 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
 		FD9E1CC32F3F021000B13045 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD9E1CC52F3F526A00B13045 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		FDD538342F3F7BED003BD7BD /* chat-detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat-detail.png"; sourceTree = "<group>"; };
+		FDD538352F3F7BED003BD7BD /* chat-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat-list.png"; sourceTree = "<group>"; };
+		FDD538362F3F7BED003BD7BD /* launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launcher.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -155,6 +161,7 @@
 			children = (
 				B384B9826382E4A367809E7B /* Banter */,
 				2820C6A1C1A60163BF1F308F /* Products */,
+				FDD538372F3F7BED003BD7BD /* screenshots */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +182,16 @@
 				5C06D47AC320AF7A2A7883F1 /* ChatList */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		FDD538372F3F7BED003BD7BD /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				FDD538342F3F7BED003BD7BD /* chat-detail.png */,
+				FDD538352F3F7BED003BD7BD /* chat-list.png */,
+				FDD538362F3F7BED003BD7BD /* launcher.png */,
+			);
+			path = screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD9E1CC62F3F526A00B13045 /* Launch Screen.storyboard in Resources */,
+				FDD538382F3F7BEE003BD7BD /* launcher.png in Resources */,
+				FDD538392F3F7BEE003BD7BD /* chat-detail.png in Resources */,
+				FDD5383A2F3F7BEE003BD7BD /* chat-list.png in Resources */,
 				152DEB8DE3BAB34B712CA214 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
