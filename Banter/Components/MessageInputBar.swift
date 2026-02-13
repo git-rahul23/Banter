@@ -11,20 +11,27 @@ struct MessageInputBar: View {
 
     @Binding var text: String
     let onSend: () -> Void
-    let onAttach: () -> Void
+    let onPhotoLibrary: () -> Void
+    let onCamera: () -> Void
 
     @FocusState private var isFocused: Bool
+    @State private var showAttachmentSheet = false
 
     var body: some View {
         VStack(spacing: 0) {
             Divider()
             HStack(alignment: .bottom, spacing: .Spacing.sm) {
-                Button(action: onAttach) {
+                Button { showAttachmentSheet = true } label: {
                     Image(systemName: String.SystemIcon.attach)
                         .font(.title2)
                         .foregroundStyle(.blue)
                 }
                 .padding(.bottom, 6)
+                .confirmationDialog(String.ChatDetail.attachImage, isPresented: $showAttachmentSheet) {
+                    Button(String.ChatDetail.photoLibrary) { onPhotoLibrary() }
+                    Button(String.ChatDetail.camera) { onCamera() }
+                    Button(String.Alert.cancel, role: .cancel) { }
+                }
 
                 TextField(String.ChatDetail.messageInputPlaceholder, text: $text, axis: .vertical)
                     .textFieldStyle(.plain)

@@ -85,22 +85,6 @@ struct FullscreenImageView: View {
     @ViewBuilder
     private var imageView: some View {
         switch imageSource {
-        case .url(let urlString):
-            AsyncImage(url: URL(string: urlString)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                case .failure:
-                    errorView
-                case .empty:
-                    ProgressView()
-                        .tint(.white)
-                @unknown default:
-                    errorView
-                }
-            }
         case .local(let path):
             if let uiImage = UIImage(contentsOfFile: path) {
                 Image(uiImage: uiImage)

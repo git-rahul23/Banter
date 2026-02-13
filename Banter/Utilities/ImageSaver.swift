@@ -25,6 +25,16 @@ final class ImageSaver {
         return dir
     }
 
+    func downloadAndSaveImage(from url: URL) async -> (path: String, fileSize: Int64, thumbnailPath: String?)? {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            guard let image = UIImage(data: data) else { return nil }
+            return await saveImage(image)
+        } catch {
+            return nil
+        }
+    }
+
     func saveImage(_ image: UIImage) async -> (path: String, fileSize: Int64, thumbnailPath: String?)? {
         let id = UUID().uuidString
         guard let data = image.jpegData(compressionQuality: 0.8) else { return nil }
@@ -35,11 +45,28 @@ final class ImageSaver {
         do {
             try data.write(to: fileURL)
             let fileSize = Int64(data.count)
-            let thumbnailPath = await saveThumbnail(image, id: id)
-            return (path: fileURL.path, fileSize: fileSize, thumbnailPath: thumbnailPath)
+            let thumbnailRelPath = await saveThumbnail(image, id: id)
+            return (path: "ChatImages/\(fileName)", fileSize: fileSize, thumbnailPath: thumbnailRelPath)
         } catch {
             return nil
         }
+    }
+
+    static func resolvedPath(_ path: String) -> String {
+        if path.hasPrefix("/") {
+            if FileManager.default.fileExists(atPath: path) {
+                return path
+            }
+            // Migrate old absolute path — extract relative portion after Documents/
+            if let range = path.range(of: "Documents/") {
+                let relativePath = String(path[range.upperBound...])
+                let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                return docs.appendingPathComponent(relativePath).path
+            }
+            return path
+        }
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        return docs.appendingPathComponent(path).path
     }
 
     private func saveThumbnail(_ image: UIImage, id: String) async -> String? {
@@ -59,7 +86,7 @@ final class ImageSaver {
 
         do {
             try data.write(to: fileURL)
-            return fileURL.path
+            return "ChatImages/Thumbnails/\(fileName)"
         } catch {
             return nil
         }

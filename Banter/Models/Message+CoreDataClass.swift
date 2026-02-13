@@ -18,6 +18,23 @@ enum MessageSender: String {
     case agent
 }
 
+struct MessageThumbnail {
+    let path: String
+}
+
+struct MessageFile {
+    let path: String
+    let fileSize: Int64
+    let thumbnail: MessageThumbnail?
+
+    var formattedFileSize: String? {
+        guard fileSize > 0 else { return nil }
+        let formatter = ByteCountFormatter()
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: fileSize)
+    }
+}
+
 @objc(Message)
 public class Message: NSManagedObject {
 
@@ -27,9 +44,7 @@ public class Message: NSManagedObject {
         message: String,
         type: MessageType = .text,
         sender: MessageSender,
-        filePath: String? = nil,
-        fileSize: Int64 = 0,
-        thumbnailPath: String? = nil,
+        file: MessageFile? = nil,
         timestamp: Int64 = Int64(Date().timeIntervalSince1970 * 1000)
     ) {
         self.init(context: context)
@@ -38,9 +53,9 @@ public class Message: NSManagedObject {
         self.message = message
         self.typeRaw = type.rawValue
         self.senderRaw = sender.rawValue
-        self.filePath = filePath
-        self.fileSize = fileSize
-        self.thumbnailPath = thumbnailPath
+        self.filePath = file?.path
+        self.fileSize = file?.fileSize ?? 0
+        self.thumbnailPath = file?.thumbnail?.path
         self.timestamp = timestamp
         self.chat = chat
     }
@@ -58,10 +73,10 @@ public class Message: NSManagedObject {
     var isUser: Bool { sender == .user }
     var isFile: Bool { type == .file }
 
-    var formattedFileSize: String? {
-        guard fileSize > 0 else { return nil }
-        let formatter = ByteCountFormatter()
-        formatter.countStyle = .file
-        return formatter.string(fromByteCount: fileSize)
+    var file: MessageFile? {
+        guard let path = filePath else { return nil }
+        let resolvedPath = ImageSaver.resolvedPath(path)
+        let thumbnail = thumbnailPath.map { MessageThumbnail(path: ImageSaver.resolvedPath($0)) }
+        return MessageFile(path: resolvedPath, fileSize: fileSize, thumbnail: thumbnail)
     }
 }

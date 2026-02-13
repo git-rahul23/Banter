@@ -13,8 +13,6 @@ struct ChatDetailView: View {
     @StateObject private var viewModel: ChatDetailViewModel
     @State private var showImagePicker = false
     @State private var showCamera = false
-    @State private var showAttachmentSheet = false
-    @State private var showFullscreenImage = false
     @State private var fullscreenImageSource: ImageSource?
     @State private var isEditingTitle = false
     @State private var editedTitle = ""
@@ -58,15 +56,8 @@ struct ChatDetailView: View {
                 viewModel.sendImageMessage(image: image)
             }
         }
-        .fullScreenCover(isPresented: $showFullscreenImage) {
-            if let source = fullscreenImageSource {
-                FullscreenImageView(imageSource: source)
-            }
-        }
-        .confirmationDialog(String.ChatDetail.attachImage, isPresented: $showAttachmentSheet) {
-            Button(String.ChatDetail.photoLibrary) { showImagePicker = true }
-            Button(String.ChatDetail.camera) { showCamera = true }
-            Button(String.Alert.cancel, role: .cancel) { }
+        .fullScreenCover(item: $fullscreenImageSource) { source in
+            FullscreenImageView(imageSource: source)
         }
     }
 
@@ -79,7 +70,6 @@ struct ChatDetailView: View {
                         ForEach(viewModel.messages, id: \.objectID) { message in
                             MessageBubbleView(message: message) { source in
                                 fullscreenImageSource = source
-                                showFullscreenImage = true
                             }
                             .id(message.objectID)
                         }
@@ -131,19 +121,18 @@ struct ChatDetailView: View {
                     set: { viewModel.draftText = $0 }
                 ),
                 onSend: { viewModel.sendTextMessage() },
-                onAttach: { showAttachmentSheet = true }
+                onPhotoLibrary: { showImagePicker = true },
+                onCamera: { showCamera = true }
             )
         }
     }
 }
 
 enum ImageSource: Identifiable {
-    case url(String)
     case local(String)
 
     var id: String {
         switch self {
-        case .url(let url): return url
         case .local(let path): return path
         }
     }

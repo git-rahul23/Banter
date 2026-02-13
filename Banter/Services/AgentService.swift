@@ -48,6 +48,7 @@ final class AgentService {
     /// Called after every user message. Agent replies every 4-5 user messages.
     func onUserMessageSent(chat: Chat, onTyping: @escaping (Bool) -> Void, onReply: @escaping (Message) -> Void) {
         debounceTask?.cancel()
+        onTyping(false)
         messagesSinceLastReply += 1
 
         debounceTask = Task {
@@ -80,15 +81,20 @@ final class AgentService {
                 )
                 onReply(message)
             } else {
-                let imageUrl = Self.placeholderImages.randomElement()!
+                let imageUrlString = Self.placeholderImages.randomElement()!
+                guard let imageUrl = URL(string: imageUrlString),
+                      let saved = await ImageSaver.shared.downloadAndSaveImage(from: imageUrl) else { return }
+                let file = MessageFile(
+                    path: saved.path,
+                    fileSize: saved.fileSize,
+                    thumbnail: saved.thumbnailPath.map { MessageThumbnail(path: $0) }
+                )
                 let message = dataService.sendMessage(
                     chat: chat,
                     text: "",
                     type: .file,
                     sender: .agent,
-                    filePath: imageUrl,
-                    fileSize: Int64.random(in: 100_000...500_000),
-                    thumbnailPath: imageUrl
+                    file: file
                 )
                 onReply(message)
             }

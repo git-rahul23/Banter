@@ -58,9 +58,7 @@ final class ChatDataService {
         text: String,
         type: MessageType = .text,
         sender: MessageSender,
-        filePath: String? = nil,
-        fileSize: Int64 = 0,
-        thumbnailPath: String? = nil,
+        file: MessageFile? = nil,
         timestamp: Int64 = Int64(Date().timeIntervalSince1970 * 1000)
     ) -> Message {
         let message = Message(
@@ -69,9 +67,7 @@ final class ChatDataService {
             message: text,
             type: type,
             sender: sender,
-            filePath: filePath,
-            fileSize: fileSize,
-            thumbnailPath: thumbnailPath,
+            file: file,
             timestamp: timestamp
         )
 
@@ -113,21 +109,21 @@ final class ChatDataService {
         chat1.createdAt = 1703520000000
         chat1.updatedAt = 1703520480000
 
-        let chat1Data: [(String, MessageType, MessageSender, Int64, String?, Int64, String?)] = [
-            ("Hi! I need help booking a flight to Mumbai.", .text, .user, 1703520000000, nil, 0, nil),
-            ("Hello! I'd be happy to help you book a flight to Mumbai. When are you planning to travel?", .text, .agent, 1703520030000, nil, 0, nil),
-            ("Next Friday, December 29th.", .text, .user, 1703520090000, nil, 0, nil),
-            ("Great! And when would you like to return?", .text, .agent, 1703520120000, nil, 0, nil),
-            ("January 5th. Also, I prefer morning flights.", .text, .user, 1703520180000, nil, 0, nil),
-            ("Perfect! Let me search for morning flights. Could you share your departure city?", .text, .agent, 1703520210000, nil, 0, nil),
-            ("", .file, .user, 1703520300000, "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400", 245680, "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=100"),
-            ("Thanks for sharing! I can see you prefer IndiGo. Let me find the best options.", .text, .agent, 1703520330000, nil, 0, nil),
-            ("Flight options comparison", .file, .agent, 1703520420000, "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=400", 189420, "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=100"),
-            ("The second option looks perfect! How do I proceed?", .text, .user, 1703520480000, nil, 0, nil),
+        let chat1Data: [(String, MessageSender, Int64)] = [
+            ("Hi! I need help booking a flight to Mumbai.", .user, 1703520000000),
+            ("Hello! I'd be happy to help you book a flight to Mumbai. When are you planning to travel?", .agent, 1703520030000),
+            ("Next Friday, December 29th.", .user, 1703520090000),
+            ("Great! And when would you like to return?", .agent, 1703520120000),
+            ("January 5th. Also, I prefer morning flights.", .user, 1703520180000),
+            ("Perfect! Let me search for morning flights. Could you share your departure city?", .agent, 1703520210000),
+            ("I'll be flying from Delhi.", .user, 1703520300000),
+            ("Thanks for sharing! Let me find the best IndiGo options for you.", .agent, 1703520330000),
+            ("I found a few morning flights. The 6:30 AM and 9:15 AM departures look great.", .agent, 1703520420000),
+            ("The second option looks perfect! How do I proceed?", .user, 1703520480000),
         ]
 
         for m in chat1Data {
-            _ = Message(context: context, chat: chat1, message: m.0, type: m.1, sender: m.2, filePath: m.4, fileSize: m.5, thumbnailPath: m.6, timestamp: m.3)
+            _ = Message(context: context, chat: chat1, message: m.0, type: .text, sender: m.1, timestamp: m.2)
         }
 
         // Chat 2: Hotel Reservation Help

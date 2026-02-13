@@ -61,14 +61,17 @@ final class ChatDetailViewModel: ObservableObject {
         Task {
             guard let saved = await ImageSaver.shared.saveImage(image) else { return }
 
+            let file = MessageFile(
+                path: saved.path,
+                fileSize: saved.fileSize,
+                thumbnail: saved.thumbnailPath.map { MessageThumbnail(path: $0) }
+            )
             let message = dataService.sendMessage(
                 chat: chat,
                 text: "",
                 type: .file,
                 sender: .user,
-                filePath: saved.path,
-                fileSize: saved.fileSize,
-                thumbnailPath: saved.thumbnailPath
+                file: file
             )
 
             if messages.isEmpty {

@@ -39,11 +39,11 @@ struct MessageBubbleView: View {
 
     @ViewBuilder
     private var bubbleContent: some View {
-        if message.isFile, let filePath = message.filePath {
+        if message.isFile, let file = message.file {
             VStack(alignment: .leading, spacing: .Spacing.xs) {
-                imageContent(path: filePath)
+                imageContent(file: file)
 
-                if let size = message.formattedFileSize {
+                if let size = file.formattedFileSize {
                     Text(size)
                         .font(.caption)
                         .foregroundStyle(isUser ? .white.opacity(0.7) : .secondary)
@@ -61,41 +61,19 @@ struct MessageBubbleView: View {
     }
 
     @ViewBuilder
-    private func imageContent(path: String) -> some View {
-        if path.hasPrefix("http") {
-            AsyncImage(url: URL(string: path)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .Size.imageMaxWidth, maxHeight: .Size.imageMaxHeight)
-                        .clipShape(RoundedRectangle(cornerRadius: .Radius.md))
-                        .onTapGesture {
-                            onImageTap(.url(path))
-                        }
-                case .failure:
-                    imagePlaceholder(systemName: String.SystemIcon.imageError)
-                case .empty:
-                    ProgressView()
-                        .frame(width: .Size.imageMaxWidth, height: .Size.imagePlaceholderHeight)
-                @unknown default:
-                    imagePlaceholder(systemName: String.SystemIcon.photo)
+    private func imageContent(file: MessageFile) -> some View {
+        let displayPath = file.thumbnail?.path ?? file.path
+        if let uiImage = UIImage(contentsOfFile: displayPath) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: .Size.imageMaxWidth, maxHeight: .Size.imageMaxHeight)
+                .clipShape(RoundedRectangle(cornerRadius: .Radius.md))
+                .onTapGesture {
+                    onImageTap(.local(file.path))
                 }
-            }
         } else {
-            if let uiImage = UIImage(contentsOfFile: path) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .Size.imageMaxWidth, maxHeight: .Size.imageMaxHeight)
-                    .clipShape(RoundedRectangle(cornerRadius: .Radius.md))
-                    .onTapGesture {
-                        onImageTap(.local(path))
-                    }
-            } else {
-                imagePlaceholder(systemName: String.SystemIcon.imageError)
-            }
+            imagePlaceholder(systemName: String.SystemIcon.imageError)
         }
     }
 
