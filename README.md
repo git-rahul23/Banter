@@ -158,33 +158,6 @@ On first launch, the app automatically seeds sample conversations to demonstrate
 - **UIKit Integration**: Camera and photo library access via UIViewControllerRepresentable
 - **Swift Concurrency**: Async/await for image processing
 
-## Design Decisions
-
-### Color Scheme
-- **User Messages**: Blue bubbles with white text
-- **Agent Messages**: Gray bubbles with primary text color
-- **Accents**: Blue for user actions, purple for agent indicators
-
-### UX Patterns
-- **Auto-scroll**: Conversations automatically scroll to the latest message
-- **Smart Titles**: First user message becomes the chat title
-- **Image Thumbnails**: Images are compressed and thumbnailed for performance
-- **Empty States**: Friendly prompts guide users when conversations are empty
-
-### Performance Optimizations
-- **LazyVStack**: Messages load on-demand for smooth scrolling
-- **Image Compression**: Photos are resized to reduce storage and memory usage
-- **Thumbnail Generation**: Separate thumbnail images for list views
-
-## Future Enhancements
-
-- [ ] Multi-modal support (voice messages, documents)
-- [ ] Search within conversations
-- [ ] Message reactions and threading
-- [ ] Export conversations
-- [ ] Custom theming
-- [ ] iCloud sync across devices
-
 ## Requirements
 
 - iOS 17.0 or later
