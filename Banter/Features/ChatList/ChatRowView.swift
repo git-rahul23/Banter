@@ -12,7 +12,7 @@ struct ChatRowView: View {
     @ObservedObject var chat: Chat
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: .Spacing.md) {
             ZStack {
                 Circle()
                     .fill(
@@ -22,14 +22,14 @@ struct ChatRowView: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: 48, height: 48)
+                    .frame(width: .Size.avatar, height: .Size.avatar)
 
                 Text(avatarText)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: .Size.icon, weight: .semibold))
                     .foregroundStyle(.white)
             }
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: .Spacing.xs) {
                 HStack {
                     Text(chat.title ?? "")
                         .font(.system(size: 16, weight: .semibold))
@@ -43,22 +43,22 @@ struct ChatRowView: View {
                 }
 
                 if (chat.lastMessage ?? "").isEmpty {
-                    Text("No messages yet")
+                    Text(String.ChatList.noMessagesYet)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(Int.LineLimit.chatRow)
                 } else {
-                    (Text(Image(systemName: isLastMessageFromUser ? "arrow.turn.up.right" : "sparkles"))
+                    (Text(Image(systemName: isLastMessageFromUser ? String.SystemIcon.userMessage : String.SystemIcon.agentMessage))
                         .font(.caption2)
                         .foregroundColor(isLastMessageFromUser ? .blue : .purple)
                      + Text(" \(chat.lastMessage ?? "")")
                         .font(.subheadline)
                         .foregroundColor(.secondary))
-                    .lineLimit(2)
+                    .lineLimit(Int.LineLimit.chatRow)
                 }
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, .Spacing.xs)
     }
 
     private var isLastMessageFromUser: Bool {

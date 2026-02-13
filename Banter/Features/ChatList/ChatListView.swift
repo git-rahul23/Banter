@@ -23,19 +23,19 @@ struct ChatListView: View {
                     if viewModel.chats.isEmpty {
                         emptyState
                     } else {
-                        chatList(viewModel: viewModel)
+                        chatList
                     }
                 } else {
                     ProgressView()
                 }
             }
-            .navigationTitle("Banter")
+            .navigationTitle(String.App.title)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         createNewChat()
                     } label: {
-                        Image(systemName: "square.and.pencil")
+                        Image(systemName: String.SystemIcon.compose)
                             .font(.title3)
                     }
                 }
@@ -49,41 +49,39 @@ struct ChatListView: View {
                 let service = ChatDataService(context: context)
                 service.seedDataIfNeeded()
                 viewModel = ChatListViewModel(dataService: service)
-            } else {
-                viewModel?.loadChats()
             }
         }
-        .alert("Delete Chat", isPresented: $showDeleteConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert(String.Alert.deleteChat, isPresented: $showDeleteConfirmation) {
+            Button(String.Alert.cancel, role: .cancel) { }
+            Button(String.Alert.delete, role: .destructive) {
                 if let chat = chatToDelete {
                     viewModel?.deleteChat(chat)
                 }
             }
         } message: {
-            Text("Are you sure you want to delete this chat? This action cannot be undone.")
+            Text(String.Alert.deleteChatMessage)
         }
     }
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "bubble.left.and.bubble.right")
-                .font(.system(size: 64))
+        VStack(spacing: .Spacing.lg) {
+            Image(systemName: String.SystemIcon.emptyState)
+                .font(.system(size: .Size.avatarLg))
                 .foregroundStyle(.secondary)
-            Text("No Conversations Yet")
+            Text(String.ChatList.emptyStateTitle)
                 .font(.title2)
                 .fontWeight(.semibold)
-            Text("Tap the compose button to start a new chat")
+            Text(String.ChatList.emptyStateMessage)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
-        .padding(40)
+        .padding(.Spacing.xxl)
     }
 
-    private func chatList(viewModel: ChatListViewModel) -> some View {
+    private var chatList: some View {
         List {
-            ForEach(viewModel.chats, id: \.objectID) { chat in
+            ForEach(viewModel?.chats ?? [], id: \.objectID) { chat in
                 ChatRowView(chat: chat)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -94,9 +92,11 @@ struct ChatListView: View {
                             chatToDelete = chat
                             showDeleteConfirmation = true
                         } label: {
-                            Label("Delete", systemImage: "trash")
+                            Label(String.Alert.delete, systemImage: String.SystemIcon.delete)
                         }
+                        .tint(.red)
                     }
+                    .listRowBackground(Color.clear)
             }
         }
         .listStyle(.plain)

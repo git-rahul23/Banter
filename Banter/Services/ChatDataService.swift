@@ -11,7 +11,7 @@ import CoreData
 @MainActor
 final class ChatDataService {
 
-    private let context: NSManagedObjectContext
+    let context: NSManagedObjectContext
 
     init(context: NSManagedObjectContext) {
         self.context = context
@@ -75,7 +75,7 @@ final class ChatDataService {
             timestamp: timestamp
         )
 
-        chat.lastMessage = type == .file ? (text.isEmpty ? "Sent an image" : text) : text
+        chat.lastMessage = type == .file ? (text.isEmpty ? String.ChatDetail.sentAnImage : text) : text
         chat.lastMessageTimestamp = timestamp
         chat.updatedAt = timestamp
 

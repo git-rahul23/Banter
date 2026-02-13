@@ -51,10 +51,10 @@ struct ChatDetailView: View {
                 viewModel = ChatDetailViewModel(chat: chat, dataService: service)
             }
         }
-        .alert("Edit Chat Title", isPresented: $isEditingTitle) {
-            TextField("Chat title", text: $editedTitle)
-            Button("Cancel", role: .cancel) { }
-            Button("Save") {
+        .alert(String.ChatDetail.editTitle, isPresented: $isEditingTitle) {
+            TextField(String.ChatDetail.titlePlaceholder, text: $editedTitle)
+            Button(String.Alert.cancel, role: .cancel) { }
+            Button(String.Alert.save) {
                 viewModel?.updateTitle(editedTitle)
             }
         }
@@ -73,10 +73,10 @@ struct ChatDetailView: View {
                 FullscreenImageView(imageSource: source)
             }
         }
-        .confirmationDialog("Attach Image", isPresented: $showAttachmentSheet) {
-            Button("Photo Library") { showImagePicker = true }
-            Button("Camera") { showCamera = true }
-            Button("Cancel", role: .cancel) { }
+        .confirmationDialog(String.ChatDetail.attachImage, isPresented: $showAttachmentSheet) {
+            Button(String.ChatDetail.photoLibrary) { showImagePicker = true }
+            Button(String.ChatDetail.camera) { showCamera = true }
+            Button(String.Alert.cancel, role: .cancel) { }
         }
     }
 
@@ -99,9 +99,9 @@ struct ChatDetailView: View {
                                 .id("typing-indicator")
                         }
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.top, 8)
-                    .padding(.bottom, 8)
+                    .padding(.horizontal, .Spacing.md)
+                    .padding(.top, .Spacing.sm)
+                    .padding(.bottom, .Spacing.sm)
                 }
                 .onChange(of: viewModel.scrollToMessageId) { _, newId in
                     if let id = newId {

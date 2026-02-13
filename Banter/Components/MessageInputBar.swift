@@ -18,35 +18,35 @@ struct MessageInputBar: View {
     var body: some View {
         VStack(spacing: 0) {
             Divider()
-            HStack(alignment: .bottom, spacing: 8) {
+            HStack(alignment: .bottom, spacing: .Spacing.sm) {
                 Button(action: onAttach) {
-                    Image(systemName: "plus.circle.fill")
+                    Image(systemName: String.SystemIcon.attach)
                         .font(.title2)
                         .foregroundStyle(.blue)
                 }
                 .padding(.bottom, 6)
 
-                TextField("Type a message...", text: $text, axis: .vertical)
+                TextField(String.ChatDetail.messageInputPlaceholder, text: $text, axis: .vertical)
                     .textFieldStyle(.plain)
-                    .lineLimit(1...5)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
+                    .lineLimit(Int.LineLimit.messageInputMin...Int.LineLimit.messageInputMax)
+                    .padding(.horizontal, .Spacing.md)
+                    .padding(.vertical, .Spacing.sm)
                     .background(Color(.systemGray6))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .clipShape(RoundedRectangle(cornerRadius: .Radius.xl))
                     .focused($isFocused)
 
                 Button {
                     onSend()
                 } label: {
-                    Image(systemName: "arrow.up.circle.fill")
+                    Image(systemName: String.SystemIcon.send)
                         .font(.title2)
                         .foregroundStyle(canSend ? .blue : .gray)
                 }
                 .disabled(!canSend)
                 .padding(.bottom, 6)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .padding(.horizontal, .Spacing.md)
+            .padding(.vertical, .Spacing.sm)
             .background(.bar)
         }
     }

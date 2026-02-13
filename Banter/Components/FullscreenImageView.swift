@@ -72,7 +72,7 @@ struct FullscreenImageView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "xmark.circle.fill")
+                        Image(systemName: String.SystemIcon.close)
                             .font(.title2)
                             .foregroundStyle(.white.opacity(0.8))
                     }
@@ -113,11 +113,11 @@ struct FullscreenImageView: View {
     }
 
     private var errorView: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "photo.badge.exclamationmark")
+        VStack(spacing: .Spacing.md) {
+            Image(systemName: String.SystemIcon.imageError)
                 .font(.largeTitle)
                 .foregroundStyle(.white.opacity(0.5))
-            Text("Failed to load image")
+            Text(String.Error.failedToLoadImage)
                 .foregroundStyle(.white.opacity(0.5))
         }
     }

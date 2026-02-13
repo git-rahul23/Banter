@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,7 @@
 		DFBF2E9C46837842F9453CB3 /* BanterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6248E88C3CC6B17424D00 /* BanterApp.swift */; };
 		EDD33939F3F3C269BB4C398D /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8993D2F890D502300446E0B7 /* ChatListView.swift */; };
 		F8ED3F8A1AFD0552967E8C6B /* TimestampFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072951E9C4B0437D6BD82E7E /* TimestampFormatter.swift */; };
+		FD9E1CC42F3F021000B13045 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9E1CC32F3F021000B13045 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		D6E60BD27E70A8D287B14D80 /* Banter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Banter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72B121904FD699E0854584F /* ChatDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataService.swift; sourceTree = "<group>"; };
 		F0272A508B9E79F338F02F47 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
+		FD9E1CC32F3F021000B13045 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -156,6 +158,7 @@
 		D8E7602E2663B764DBC05E98 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FD9E1CC32F3F021000B13045 /* Constants.swift */,
 				7E4AD7A59B19A5F4F52139FB /* ImageSaver.swift */,
 				072951E9C4B0437D6BD82E7E /* TimestampFormatter.swift */,
 			);
@@ -216,7 +219,6 @@
 			);
 			mainGroup = D4AAF0CBE8B9404F413F284E;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -256,6 +258,7 @@
 				6BA82DD34C804230DF188105 /* ImageSaver.swift in Sources */,
 				77075CEEDBB559062D6DEF9A /* Message+CoreDataClass.swift in Sources */,
 				51894F78A7F5CA3B51C82979 /* MessageBubbleView.swift in Sources */,
+				FD9E1CC42F3F021000B13045 /* Constants.swift in Sources */,
 				A682602C5D86803FAEA0A66F /* MessageInputBar.swift in Sources */,
 				45BE29AF3C7F7A7F6547D86E /* PersistenceController.swift in Sources */,
 				F8ED3F8A1AFD0552967E8C6B /* TimestampFormatter.swift in Sources */,

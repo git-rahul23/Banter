@@ -73,7 +73,7 @@ final class ChatDetailViewModel {
             )
 
             if messages.isEmpty {
-                dataService.updateChatTitle(chat, title: "Image Chat")
+                dataService.updateChatTitle(chat, title: String.ChatDetail.imageChatTitle)
             }
 
             messages.append(message)
