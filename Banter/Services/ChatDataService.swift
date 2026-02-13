@@ -73,6 +73,7 @@ final class ChatDataService {
 
         chat.lastMessage = type == .file ? (text.isEmpty ? String.ChatDetail.sentAnImage : text) : text
         chat.lastMessageTimestamp = timestamp
+        chat.lastMessageSender = sender.rawValue
         chat.updatedAt = timestamp
 
         save()
@@ -122,6 +123,7 @@ final class ChatDataService {
             ("The second option looks perfect! How do I proceed?", .user, 1703520480000),
         ]
 
+        chat1.lastMessageSender = MessageSender.user.rawValue
         for m in chat1Data {
             _ = Message(context: context, chat: chat1, message: m.0, type: .text, sender: m.1, timestamp: m.2)
         }
@@ -144,6 +146,8 @@ final class ChatDataService {
             ("I've found 5 hotels in that area. Here's a comparison.", .text, .agent, 1703450000000),
         ]
 
+        chat2.lastMessageSender = MessageSender.agent.rawValue
+        
         for m in chat2Data {
             _ = Message(context: context, chat: chat2, message: m.0, type: m.1, sender: m.2, timestamp: m.3)
         }
@@ -166,6 +170,8 @@ final class ChatDataService {
             ("Yes, both accept reservations. I'd recommend booking ahead for the holidays.", .text, .agent, 1703377000000),
             ("Thanks! I'll check them out.", .text, .user, 1703380000000),
         ]
+        
+        chat3.lastMessageSender = MessageSender.user.rawValue
 
         for m in chat3Data {
             _ = Message(context: context, chat: chat3, message: m.0, type: m.1, sender: m.2, timestamp: m.3)

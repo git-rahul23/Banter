@@ -28,6 +28,7 @@
 		EDD33939F3F3C269BB4C398D /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8993D2F890D502300446E0B7 /* ChatListView.swift */; };
 		F8ED3F8A1AFD0552967E8C6B /* TimestampFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072951E9C4B0437D6BD82E7E /* TimestampFormatter.swift */; };
 		FD9E1CC42F3F021000B13045 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9E1CC32F3F021000B13045 /* Constants.swift */; };
+		FD9E1CC62F3F526A00B13045 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9E1CC52F3F526A00B13045 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,10 +51,11 @@
 		CEA135AAF7DE48D99AFC521D /* MessageInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputBar.swift; sourceTree = "<group>"; };
 		D18CFDDC71FD140BBAE252D9 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D28BF69E6EFBECE0F1FD5631 /* AgentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentService.swift; sourceTree = "<group>"; };
-		D6E60BD27E70A8D287B14D80 /* Banter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Banter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6E60BD27E70A8D287B14D80 /* Banter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Banter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72B121904FD699E0854584F /* ChatDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataService.swift; sourceTree = "<group>"; };
 		F0272A508B9E79F338F02F47 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
 		FD9E1CC32F3F021000B13045 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FD9E1CC52F3F526A00B13045 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				C4D6248E88C3CC6B17424D00 /* BanterApp.swift */,
+				FD9E1CC52F3F526A00B13045 /* Launch Screen.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9E1CC62F3F526A00B13045 /* Launch Screen.storyboard in Resources */,
 				152DEB8DE3BAB34B712CA214 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -340,6 +345,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Banter needs photo library access to share images in chat.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,6 +362,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -366,6 +373,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Banter needs photo library access to share images in chat.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

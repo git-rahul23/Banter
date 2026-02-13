@@ -30,6 +30,8 @@ extension String {
         static let imageChatTitle = "Image Chat"
         static let sentAnImage = "Sent an image"
         static let messageInputPlaceholder = "Type a message..."
+        static let emptyStateTitle = "Let's get this banter started! 🎉"
+        static let emptyStateSubtitle = "Drop a message and watch the magic happen ✨"
     }
     
     enum Alert {
