@@ -10,23 +10,25 @@ import CoreData
 
 struct ChatListView: View {
 
-    @Environment(\.managedObjectContext) private var context
-    @State private var viewModel: ChatListViewModel?
+    @StateObject private var viewModel: ChatListViewModel
     @State private var chatToDelete: Chat?
     @State private var showDeleteConfirmation = false
     @State private var navigateToChat: Chat?
 
+    private let dataService: ChatDataService
+
+    init(dataService: ChatDataService) {
+        self.dataService = dataService
+        _viewModel = StateObject(wrappedValue: ChatListViewModel(dataService: dataService))
+    }
+
     var body: some View {
         NavigationStack {
             Group {
-                if let viewModel {
-                    if viewModel.chats.isEmpty {
-                        emptyState
-                    } else {
-                        chatList
-                    }
+                if viewModel.chats.isEmpty {
+                    emptyState
                 } else {
-                    ProgressView()
+                    chatList
                 }
             }
             .navigationTitle(String.App.title)
@@ -41,21 +43,14 @@ struct ChatListView: View {
                 }
             }
             .navigationDestination(item: $navigateToChat) { chat in
-                ChatDetailView(chat: chat)
-            }
-        }
-        .onAppear {
-            if viewModel == nil {
-                let service = ChatDataService(context: context)
-                service.seedDataIfNeeded()
-                viewModel = ChatListViewModel(dataService: service)
+                ChatDetailView(chat: chat, dataService: dataService)
             }
         }
         .alert(String.Alert.deleteChat, isPresented: $showDeleteConfirmation) {
             Button(String.Alert.cancel, role: .cancel) { }
             Button(String.Alert.delete, role: .destructive) {
                 if let chat = chatToDelete {
-                    viewModel?.deleteChat(chat)
+                    viewModel.deleteChat(chat)
                 }
             }
         } message: {
@@ -81,7 +76,7 @@ struct ChatListView: View {
 
     private var chatList: some View {
         List {
-            ForEach(viewModel?.chats ?? [], id: \.objectID) { chat in
+            ForEach(viewModel.chats, id: \.objectID) { chat in
                 ChatRowView(chat: chat)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -103,7 +98,6 @@ struct ChatListView: View {
     }
 
     private func createNewChat() {
-        guard let viewModel else { return }
         let chat = viewModel.createNewChat()
         navigateToChat = chat
     }

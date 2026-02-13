@@ -10,8 +10,7 @@ import CoreData
 
 struct ChatDetailView: View {
 
-    @Environment(\.managedObjectContext) private var context
-    @State private var viewModel: ChatDetailViewModel?
+    @StateObject private var viewModel: ChatDetailViewModel
     @State private var showImagePicker = false
     @State private var showCamera = false
     @State private var showAttachmentSheet = false
@@ -22,18 +21,16 @@ struct ChatDetailView: View {
 
     let chat: Chat
 
+    init(chat: Chat, dataService: ChatDataService) {
+        self.chat = chat
+        _viewModel = StateObject(wrappedValue: ChatDetailViewModel(chat: chat, dataService: dataService))
+    }
+
     var body: some View {
-        Group {
-            if let viewModel {
-                chatContent(viewModel: viewModel)
-            } else {
-                ProgressView()
-            }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                if let viewModel {
+        chatContent
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
                     Button {
                         editedTitle = viewModel.chat.title ?? ""
                         isEditingTitle = true
@@ -44,28 +41,21 @@ struct ChatDetailView: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            if viewModel == nil {
-                let service = ChatDataService(context: context)
-                viewModel = ChatDetailViewModel(chat: chat, dataService: service)
-            }
-        }
         .alert(String.ChatDetail.editTitle, isPresented: $isEditingTitle) {
             TextField(String.ChatDetail.titlePlaceholder, text: $editedTitle)
             Button(String.Alert.cancel, role: .cancel) { }
             Button(String.Alert.save) {
-                viewModel?.updateTitle(editedTitle)
+                viewModel.updateTitle(editedTitle)
             }
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePickerView(sourceType: .photoLibrary) { image in
-                viewModel?.sendImageMessage(image: image)
+                viewModel.sendImageMessage(image: image)
             }
         }
         .sheet(isPresented: $showCamera) {
             ImagePickerView(sourceType: .camera) { image in
-                viewModel?.sendImageMessage(image: image)
+                viewModel.sendImageMessage(image: image)
             }
         }
         .fullScreenCover(isPresented: $showFullscreenImage) {
@@ -81,7 +71,7 @@ struct ChatDetailView: View {
     }
 
     @ViewBuilder
-    private func chatContent(viewModel: ChatDetailViewModel) -> some View {
+    private var chatContent: some View {
         VStack(spacing: 0) {
             ScrollViewReader { proxy in
                 ScrollView {

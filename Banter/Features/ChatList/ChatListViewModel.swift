@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import Observation
 import CoreData
+import Combine
 
 @MainActor
-@Observable
-final class ChatListViewModel: NSObject {
+final class ChatListViewModel: NSObject, ObservableObject {
 
     private let dataService: ChatDataService
-    var chats: [Chat] = []
+    @Published var chats: [Chat] = []
 
     private var fetchedResultsController: NSFetchedResultsController<Chat>?
 

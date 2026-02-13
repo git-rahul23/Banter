@@ -8,20 +8,19 @@
 import Foundation
 import SwiftUI
 import CoreData
-import Observation
+import Combine
 
 @MainActor
-@Observable
-final class ChatDetailViewModel {
+final class ChatDetailViewModel: ObservableObject {
 
     private let dataService: ChatDataService
     private let agentService: AgentService
 
     let chat: Chat
-    var messages: [Message] = []
-    var draftText: String = ""
-    var isAgentTyping: Bool = false
-    var scrollToMessageId: NSManagedObjectID?
+    @Published var messages: [Message] = []
+    @Published var draftText: String = ""
+    @Published var isAgentTyping: Bool = false
+    @Published var scrollToMessageId: NSManagedObjectID?
 
     init(chat: Chat, dataService: ChatDataService) {
         self.chat = chat

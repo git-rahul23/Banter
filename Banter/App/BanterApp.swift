@@ -13,8 +13,14 @@ struct BanterApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ChatListView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            let context = persistenceController.container.viewContext
+            let dataService = ChatDataService(context: context)
+
+            ChatListView(dataService: dataService)
+                .environment(\.managedObjectContext, context)
+                .onAppear {
+                    dataService.seedDataIfNeeded()
+                }
         }
     }
 }
