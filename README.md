@@ -9,9 +9,9 @@ Banter is an iOS chat application that enables seamless conversations with an AI
 ## Screenshots
 
 <div align="center">
+  <img src="screenshots/launcher.png" width="250" alt="Empty State">
   <img src="screenshots/chat-list.png" width="250" alt="Chat List">
   <img src="screenshots/chat-detail.png" width="250" alt="Chat Detail">
-  <img src="screenshots/empty-state.png" width="250" alt="Empty State">
 </div>
 
 ## Features
