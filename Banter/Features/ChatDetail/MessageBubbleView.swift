@@ -15,24 +15,24 @@ struct MessageBubbleView: View {
     private var isUser: Bool { message.isUser }
 
     var body: some View {
-        HStack(alignment: .bottom, spacing: 8) {
-            if isUser { Spacer(minLength: 48) }
+        HStack(alignment: .bottom, spacing: .Spacing.sm) {
+            if isUser { Spacer(minLength: .Size.messageBubbleMinWidth) }
 
-            VStack(alignment: isUser ? .trailing : .leading, spacing: 4) {
+            VStack(alignment: isUser ? .trailing : .leading, spacing: .Spacing.xs) {
                 bubbleContent
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
+                    .padding(.horizontal, .Spacing.md)
+                    .padding(.vertical, .Spacing.sm)
                     .background(isUser ? Color.blue : Color(.systemGray5))
                     .foregroundStyle(isUser ? .white : .primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                    .clipShape(RoundedRectangle(cornerRadius: .Radius.xl))
 
                 Text(TimestampFormatter.messageTime(milliseconds: message.timestamp))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
-                    .padding(.horizontal, 4)
+                    .padding(.horizontal, .Spacing.xs)
             }
 
-            if !isUser { Spacer(minLength: 48) }
+            if !isUser { Spacer(minLength: .Size.messageBubbleMinWidth) }
         }
         .padding(.vertical, 2)
     }
@@ -40,7 +40,7 @@ struct MessageBubbleView: View {
     @ViewBuilder
     private var bubbleContent: some View {
         if message.isFile, let filePath = message.filePath {
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: .Spacing.xs) {
                 imageContent(path: filePath)
 
                 if let size = message.formattedFileSize {
@@ -69,18 +69,18 @@ struct MessageBubbleView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: 220, maxHeight: 180)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(maxWidth: .Size.imageMaxWidth, maxHeight: .Size.imageMaxHeight)
+                        .clipShape(RoundedRectangle(cornerRadius: .Radius.md))
                         .onTapGesture {
                             onImageTap(.url(path))
                         }
                 case .failure:
-                    imagePlaceholder(systemName: "photo.badge.exclamationmark")
+                    imagePlaceholder(systemName: String.SystemIcon.imageError)
                 case .empty:
                     ProgressView()
-                        .frame(width: 220, height: 140)
+                        .frame(width: .Size.imageMaxWidth, height: .Size.imagePlaceholderHeight)
                 @unknown default:
-                    imagePlaceholder(systemName: "photo")
+                    imagePlaceholder(systemName: String.SystemIcon.photo)
                 }
             }
         } else {
@@ -88,22 +88,22 @@ struct MessageBubbleView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 220, maxHeight: 180)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .frame(maxWidth: .Size.imageMaxWidth, maxHeight: .Size.imageMaxHeight)
+                    .clipShape(RoundedRectangle(cornerRadius: .Radius.md))
                     .onTapGesture {
                         onImageTap(.local(path))
                     }
             } else {
-                imagePlaceholder(systemName: "photo.badge.exclamationmark")
+                imagePlaceholder(systemName: String.SystemIcon.imageError)
             }
         }
     }
 
     private func imagePlaceholder(systemName: String) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: .Radius.md)
                 .fill(Color(.systemGray4))
-                .frame(width: 220, height: 140)
+                .frame(width: .Size.imageMaxWidth, height: .Size.imagePlaceholderHeight)
             Image(systemName: systemName)
                 .font(.title)
                 .foregroundStyle(.secondary)

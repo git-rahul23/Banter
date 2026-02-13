@@ -53,15 +53,16 @@ extension String {
         static let compose = "square.and.pencil"
         static let delete = "trash"
         static let close = "xmark.circle.fill"
-        
+
         static let emptyState = "bubble.left.and.bubble.right"
-        
+
         static let userMessage = "arrow.turn.up.right"
         static let agentMessage = "sparkles"
         static let attach = "plus.circle.fill"
         static let send = "arrow.up.circle.fill"
-        
+
         static let imageError = "photo.badge.exclamationmark"
+        static let photo = "photo"
     }
     
 }
@@ -83,8 +84,8 @@ extension CGFloat {
         static let sm: CGFloat = 8
         static let md: CGFloat = 12
         static let lg: CGFloat = 16
-        static let xl: CGFloat = 20
-        static let xxl: CGFloat = 24
+        static let xl: CGFloat = 18
+        static let xxl: CGFloat = 20
     }
     
     enum Size {
@@ -93,6 +94,10 @@ extension CGFloat {
         static let avatarLg: CGFloat = 64
         static let icon: CGFloat = 18
         static let iconLg: CGFloat = 24
+        static let messageBubbleMinWidth: CGFloat = 48
+        static let imageMaxWidth: CGFloat = 220
+        static let imageMaxHeight: CGFloat = 180
+        static let imagePlaceholderHeight: CGFloat = 140
     }
     
 }

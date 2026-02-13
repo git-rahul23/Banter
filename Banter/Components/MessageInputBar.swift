@@ -32,7 +32,7 @@ struct MessageInputBar: View {
                     .padding(.horizontal, .Spacing.md)
                     .padding(.vertical, .Spacing.sm)
                     .background(Color(.systemGray6))
-                    .clipShape(RoundedRectangle(cornerRadius: .Radius.xl))
+                    .clipShape(RoundedRectangle(cornerRadius: .Radius.xxl))
                     .focused($isFocused)
 
                 Button {
